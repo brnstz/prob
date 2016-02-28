@@ -57,5 +57,9 @@ func TestNoReplaceOrdered(t *testing.T) {
 }
 
 func TestNoReplaceUnordered(t *testing.T) {
+	tests := []test{
+		{100, 5, "75287520"},
+	}
 
+	runTests(t, tests, prob.NoReplaceUnordered, "prob.NoReplaceUnordered")
 }

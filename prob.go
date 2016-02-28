@@ -74,6 +74,10 @@ func factorial(n *big.Int) *big.Int {
 		if multiplier.Cmp(one) == -1 {
 			break
 		}
+
+		result.Mul(&result, &multiplier)
+
+		multiplier.Sub(&multiplier, one)
 	}
 
 	return &result
@@ -81,7 +85,9 @@ func factorial(n *big.Int) *big.Int {
 
 // NoReplaceUnordered computes the number of outcomes when k choices
 // are made from n possibilities, without regard for order and where
-// values in n may only be chosen once. Mathemtically, this is:
+// values in n may only be chosen once. This is the same as the binomial
+// coefficient. This computation is also provided by math/big.Int.Binomial() but
+// is re-implemented here for fun. Mathemtically, this is:
 // n! / (k! * (n - k)!)
 func NoReplaceUnordered(n, k *big.Int) *big.Int {
 	var result, denom big.Int
@@ -94,7 +100,6 @@ func NoReplaceUnordered(n, k *big.Int) *big.Int {
 	denom.Mul(factorial(k), &denom)
 
 	// Compute final result with division
-
 	result.Div(factorial(n), &denom)
 
 	return &result
