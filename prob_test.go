@@ -7,15 +7,17 @@ import (
 	"github.com/brnstz/prob"
 )
 
+type test struct {
+	n      int64
+	k      int64
+	result string
+}
+
 func TestReplaceOrdered(t *testing.T) {
 	// tests is a list to run with the expectation that
 	// prob.ReplaceOrdered(n, k) == result (where n and k are converted to
 	// big.Int values and the result is tested as a base10 string)
-	tests := []struct {
-		n      int64
-		k      int64
-		result string
-	}{
+	tests := []test{
 		{5, 4, "625"},
 		{10, 2, "100"},
 		{0, 21, "0"},
@@ -42,11 +44,7 @@ func TestNoReplaceOrdered(t *testing.T) {
 	// tests is a list to run with the expectation that
 	// prob.NoReplaceOrdered(n, k) == result (where n and k are converted to
 	// big.Int values and the result is tested as a base10 string)
-	tests := []struct {
-		n      int64
-		k      int64
-		result string
-	}{
+	tests := []test{
 		{100, 3, "970200"},
 		{5, 6, "0"},
 	}
@@ -66,5 +64,8 @@ func TestNoReplaceOrdered(t *testing.T) {
 			)
 		}
 	}
+}
+
+func TestNoReplaceUnordered(t *testing.T) {
 
 }
