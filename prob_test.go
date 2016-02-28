@@ -13,6 +13,24 @@ type test struct {
 	result string
 }
 
+type Tester func(n, k *big.Int) *big.Int
+
+func runTests(t *testing.T, tests []test, tester Tester, name string) {
+	for _, test := range tests {
+		// Get the result as a base10 string
+		actual := tester(
+			big.NewInt(test.n), big.NewInt(test.k),
+		).Text(10)
+
+		// Check result matches or signal fatal error
+		if actual != test.result {
+			t.Fatalf("expected %s(%d, %d) == %v but got %v",
+				name, test.n, test.k, test.result, actual,
+			)
+		}
+	}
+}
+
 func TestReplaceOrdered(t *testing.T) {
 	// tests is a list to run with the expectation that
 	// prob.ReplaceOrdered(n, k) == result (where n and k are converted to
@@ -23,21 +41,7 @@ func TestReplaceOrdered(t *testing.T) {
 		{0, 21, "0"},
 	}
 
-	// Go through each test
-	for _, test := range tests {
-
-		// Get the result as a base10 string
-		actual := prob.ReplaceOrdered(
-			big.NewInt(test.n), big.NewInt(test.k),
-		).Text(10)
-
-		// Check result matches or signal fatal error
-		if actual != test.result {
-			t.Fatalf("expected prob.ReplaceOrdered(%d, %d) == %v but got %v",
-				test.n, test.k, test.result, actual,
-			)
-		}
-	}
+	runTests(t, tests, prob.ReplaceOrdered, "prob.ReplaceOrdered")
 }
 
 func TestNoReplaceOrdered(t *testing.T) {
@@ -49,21 +53,7 @@ func TestNoReplaceOrdered(t *testing.T) {
 		{5, 6, "0"},
 	}
 
-	// Go through each test
-	for _, test := range tests {
-
-		// Get the result as a base10 string
-		actual := prob.NoReplaceOrdered(
-			big.NewInt(test.n), big.NewInt(test.k),
-		).Text(10)
-
-		// Check result matches or signal fatal error
-		if actual != test.result {
-			t.Fatalf("expected prob.NoReplaceOrdered(%d, %d) == %v but got %v",
-				test.n, test.k, test.result, actual,
-			)
-		}
-	}
+	runTests(t, tests, prob.NoReplaceOrdered, "prob.NoReplaceOrdered")
 }
 
 func TestNoReplaceUnordered(t *testing.T) {
