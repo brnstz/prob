@@ -6,3 +6,34 @@ Probability experiments in Go
 ## Requirements
 
 * Go 1.6+
+
+## Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "math/big"
+
+    "github.com/brnstz/prob"
+)
+
+func main() {
+    // There are 100 restaurants in a city. A restaurant reviewer wants to
+    // eat dinner at a different restaurant every night in a week. How many
+    // different possible dining schedules could he have?
+    var (
+        restaurants int64 = 100
+        days        int64 = 7
+    )
+
+    schedules := prob.NoReplaceOrdered(big.NewInt(restaurants), big.NewInt(days))
+
+    fmt.Printf(
+        "There are %s different ways to schedule dinner.",
+        schedules.Text(10),
+    )
+
+}
+```
