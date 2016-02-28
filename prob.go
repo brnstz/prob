@@ -104,3 +104,17 @@ func NoReplaceUnordered(n, k *big.Int) *big.Int {
 
 	return &result
 }
+
+// ReplaceUnordered computes the number of outcomes when k choices are made
+// from n possibilities, without regard for order and allowing for duplicate
+// values from n. This is also known as the Bose-Einstein value. Mathemtically,
+// this is bionomial(n + k - 1, k)
+func ReplaceUnordered(n, k *big.Int) *big.Int {
+	var n2 big.Int
+
+	// Set up first part of bionomail as n + k -1
+	n2.Add(n, k)
+	n2.Sub(&n2, one)
+
+	return NoReplaceUnordered(&n2, k)
+}

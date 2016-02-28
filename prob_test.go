@@ -63,3 +63,11 @@ func TestNoReplaceUnordered(t *testing.T) {
 
 	runTests(t, tests, prob.NoReplaceUnordered, "prob.NoReplaceUnordered")
 }
+
+func TestReplaceUnordered(t *testing.T) {
+	tests := []test{
+	// FIXME
+	}
+
+	runTests(t, tests, prob.ReplaceUnordered, "prob.ReplaceUnordered")
+}
