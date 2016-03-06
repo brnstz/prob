@@ -2,6 +2,7 @@
 Probability experiments in Go
 
 [![GoDoc](https://godoc.org/github.com/brnstz/prob?status.svg)](https://godoc.org/github.com/brnstz/prob)
+[![Build Status](https://travis-ci.org/brnstz/prob.svg?branch=master)](https://travis-ci.org/brnstz/prob.svg?branch=master)
 
 ## Requirements
 
