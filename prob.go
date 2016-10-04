@@ -22,7 +22,8 @@ func ReplaceOrdered(n, k *big.Int) *big.Int {
 
 // NoReplaceOrdered computes the possible number of ordered outcomes when k
 // choices are made from n possibilities, where values in n may only be chosen
-// once. Mathematically this is: n * (n - 1) * ... (n - k + 1)
+// once. Mathematically this is: n * (n - 1) * ... (n - k + 1) or
+// n! / (n - k)!
 func NoReplaceOrdered(n, k *big.Int) *big.Int {
 	var result, multiplier, lastvalue big.Int
 
